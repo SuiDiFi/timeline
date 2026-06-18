@@ -410,6 +410,47 @@ footer{
 .cell-win{color:var(--neon-c) !important}
 .cell-lose{color:var(--txt-faint) !important}
 @media(max-width:768px){.compare-row{grid-template-columns:1fr}.compare-row>div{border-right:none;border-bottom:1px solid var(--line)}}
+
+/* === 节点 API === */
+.api-modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+.api-mod{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;backdrop-filter:blur(12px);transition:.3s;position:relative}
+.api-mod:hover{border-color:var(--line-bright);transform:translateY(-3px);box-shadow:var(--shadow-neon)}
+.api-mod-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.api-mod-name{font-family:'JetBrains Mono','Consolas',monospace;font-weight:700;font-size:14px;color:var(--neon-c)}
+.api-mod-count{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--neon-p);background:rgba(168,85,247,.12);padding:2px 8px;border-radius:4px}
+.api-mod-desc{color:var(--txt-dim);font-size:12px;line-height:1.6}
+.api-highlight{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:30px}
+.api-hl{background:linear-gradient(135deg,rgba(0,240,255,.06),rgba(168,85,247,.06));border:1px solid var(--line-bright);border-radius:12px;padding:24px}
+.api-hl-num{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:900;background:var(--grad-1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:8px}
+.api-hl-name{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:8px}
+.api-hl-desc{color:var(--txt-dim);font-size:12px;line-height:1.6}
+.code-block{background:var(--bg-1);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:14px;font-family:'JetBrains Mono','Consolas',monospace;font-size:12px;color:var(--txt);overflow-x:auto;line-height:1.7}
+.code-block .kw{color:var(--neon-pink)}
+.code-block .fn{color:var(--neon-c)}
+.code-block .str{color:#a3e635}
+.code-block .cm{color:var(--txt-faint)}
+.code-block .ty{color:#fbbf24}
+
+/* === 记忆库 === */
+.memory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.mem-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:12px;transition:.3s}
+.mem-card:hover{border-color:var(--line-bright)}
+.mem-icon{font-size:20px;margin-bottom:10px}
+.mem-name{color:var(--neon-c);font-weight:700;margin-bottom:8px}
+.mem-desc{color:var(--txt-dim);font-size:11px;line-height:1.5}
+
+/* === 今日增量 === */
+.delta-banner{background:linear-gradient(135deg,rgba(255,45,146,.08),rgba(168,85,247,.08));border:1px solid rgba(255,45,146,.3);border-radius:14px;padding:24px 30px;margin-bottom:40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.delta-pulse{width:14px;height:14px;background:var(--neon-pink);border-radius:50%;box-shadow:0 0 20px var(--neon-pink);animation:pulse 1.5s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.delta-text{flex:1;min-width:200px}
+.delta-tag{font-size:10px;letter-spacing:3px;color:var(--neon-pink);margin-bottom:4px;text-transform:uppercase}
+.delta-msg{color:var(--txt);font-size:14px}
+
+/* === Task blocked 状态 === */
+.task-card.blocked{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.03)}
+.task-card.blocked::after{content:"⏸";position:absolute;top:14px;right:18px;color:#fbbf24;font-size:18px;font-weight:900}
+.task-card.blocked .task-status{background:rgba(251,191,36,.15);color:#fbbf24}
 </style>
 </head>
 <body>
@@ -422,22 +463,24 @@ footer{
   <div class="nav-links">
     <a href="#timeline">决策时间线</a>
     <a href="#arch">架构</a>
+    <a href="#api">节点API</a>
     <a href="#stack">技术栈</a>
     <a href="#schema">Schema</a>
     <a href="#rules">壁垒</a>
     <a href="#progress">进度</a>
+    <a href="#memory">记忆库</a>
   </div>
 </nav>
 
 <!-- ==================== 英雄区 ==================== -->
 <section class="hero">
-  <div class="hero-tag">PROJECT FILE · 2026.06.18 · CLASSIFIED</div>
+  <div class="hero-tag">PROJECT FILE · 2026.06.18 · LIVE</div>
   <h1>
     <span class="gradient">微信群聊娱乐</span><br>
     机器人 <span class="glitch" data-text="SaaS">SaaS</span> 商用项目
   </h1>
   <div class="hero-desc">
-    一份单日 8 轮深度决策的完整档案。从零起步、卡密激活、代理体系、防封壁垒——
+    一份单日 8 轮深度决策 + 1 日实施全程档案。从零起步、卡密激活、代理体系、防封壁垒——
     在合规边界内逼近行业天花板。AI Agent 全栈实施。
   </div>
   <div class="hero-stats">
@@ -447,9 +490,9 @@ footer{
       <div class="stat-desc">深度多轮迭代</div>
     </div>
     <div class="stat">
-      <div class="stat-num" data-count="9">0</div>
+      <div class="stat-num" data-count="10">0</div>
       <div class="stat-label">个 TASK</div>
-      <div class="stat-desc">7 已完成</div>
+      <div class="stat-desc">8 已完成</div>
     </div>
     <div class="stat">
       <div class="stat-num" data-count="42">0</div>
@@ -460,6 +503,16 @@ footer{
       <div class="stat-num" data-count="71">0</div>
       <div class="stat-label">功能开关</div>
       <div class="stat-desc">参考 7xzs 商用基线</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="52">0</div>
+      <div class="stat-label">节点 API</div>
+      <div class="stat-desc">7 模块 mixin</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="6">0</div>
+      <div class="stat-label">长期记忆</div>
+      <div class="stat-desc">跨会话保留</div>
     </div>
   </div>
   <div class="hero-scroll">▼ SCROLL TO EXPLORE</div>
@@ -743,7 +796,27 @@ footer{
         </div>
       </div>
 
-      <div class="arch-arrow">⇣ MINHOOK</div>
+      <div class="arch-arrow">⇣ 7-MODULE CLIENT</div>
+
+      <div class="arch-tier">
+        <div class="arch-node">
+          <div class="arch-node-icon">📦</div>
+          <div class="arch-node-name">CLIENT (Mixin)</div>
+          <div class="arch-node-desc">login/message/user/chatroom/friend/tool</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-node-icon">🛡️</div>
+          <div class="arch-node-name">PROTECT 单例</div>
+          <div class="arch-node-desc">4 小时新设备风控</div>
+        </div>
+        <div class="arch-node">
+          <div class="arch-node-icon">⏱️</div>
+          <div class="arch-node-name">QUEUE 节流</div>
+          <div class="arch-node-desc">_queue_message · 1 秒</div>
+        </div>
+      </div>
+
+      <div class="arch-arrow">⇣ MINHOOK · TCP 10086</div>
 
       <div class="arch-tier">
         <div class="arch-node">
@@ -754,6 +827,60 @@ footer{
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ==================== 节点 API 设计（NEW） ==================== -->
+<section id="api">
+  <div class="section-tag">NODE API · ADR-006 · NEW</div>
+  <h2 class="section-title">节点 7 模块<span class="accent">API 设计</span></h2>
+  <p class="section-sub">参考 XYBotV2 WechatAPIClient（aiohttp + Mixin 组合），抽取微信机器人能力的"自然领域模型"。method signature 抄 80%，底层换成 wcferry 调用——AI Agent 跨文件理解成本最低，方法签名标准化。</p>
+
+  <div class="api-modules">
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">base</div><div class="api-mod-count">2</div></div><div class="api-mod-desc">基类 + 9 种异常处理（UserLoggedOut / BanProtection 等）</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">login</div><div class="api-mod-count">12</div></div><div class="api-mod-desc">扫码、心跳、登出、设备 ID/名称、自动心跳</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">message</div><div class="api-mod-count">13</div></div><div class="api-mod-desc">发文本/图/语音/视频/链接/卡片/CDN + 1 秒节流队列 ⭐</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">user</div><div class="api-mod-count">3</div></div><div class="api-mod-desc">个人信息、二维码</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">chatroom</div><div class="api-mod-count">6</div></div><div class="api-mod-desc">群信息/成员/公告/二维码/拉人/邀请</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">friend</div><div class="api-mod-count">5</div></div><div class="api-mod-desc">联系人/详情/昵称/加好友</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">tool</div><div class="api-mod-count">10+</div></div><div class="api-mod-desc">silk/wav/amr 互转 · 文件下载 · 代理设置</div></div>
+    <div class="api-mod"><div class="api-mod-head"><div class="api-mod-name">protect</div><div class="api-mod-count">3</div></div><div class="api-mod-desc">单例 · 4 小时新设备风控保护 ⭐</div></div>
+  </div>
+
+  <div class="api-highlight">
+    <div class="api-hl">
+      <div class="api-hl-num">01</div>
+      <div class="api-hl-name">⏱️ 1 秒节流队列</div>
+      <div class="api-hl-desc">所有发消息走内部 _queue_message 队列，强制 await sleep(1)。wcferry 默认无节流，直接发爆 = 立刻封号。<strong>MVP 必做</strong>。</div>
+    </div>
+    <div class="api-hl">
+      <div class="api-hl-num">02</div>
+      <div class="api-hl-name">🛡️ Protect 风控单例</div>
+      <div class="api-hl-desc">新设备登录后 14400 秒（4 小时）窗口内拦截发消息/改步数等敏感操作。ignore_protect=True 可绕过（仅测试用）。<strong>MVP 必做</strong>。</div>
+    </div>
+    <div class="api-hl">
+      <div class="api-hl-num">03</div>
+      <div class="api-hl-name">📨 三元组返回</div>
+      <div class="api-hl-desc">所有发消息方法返回 tuple[client_msg_id, create_time, new_msg_id]。撤回、引用、关系追踪都要这三个值。一次性给齐零额外查询。</div>
+    </div>
+  </div>
+
+  <div class="code-block">
+<span class="cm"># API 签名示例：抄签名不抄实现，底层换成 wcferry 调用</span>
+
+<span class="kw">async def</span> <span class="fn">send_text_message</span>(
+    <span class="kw">self</span>,
+    wxid: <span class="ty">str</span>,
+    content: <span class="ty">str</span>,
+    at: <span class="ty">list | str</span> = <span class="str">''</span>
+) -&gt; <span class="ty">tuple[int, int, int]</span>:
+    <span class="cm"># 1. Protect 检查（4 小时窗口）</span>
+    <span class="kw">if not</span> <span class="fn">Protect</span>().<span class="fn">check</span>(<span class="ty">14400</span>) <span class="kw">and not</span> <span class="kw">self</span>.ignore_protect:
+        <span class="kw">raise</span> <span class="fn">BanProtection</span>(<span class="str">"4h window"</span>)
+    <span class="cm"># 2. 走 1 秒节流队列</span>
+    result = <span class="kw">await</span> <span class="kw">self</span>.<span class="fn">_queue_message</span>(<span class="kw">self</span>.<span class="fn">_send_text</span>, wxid, content, at)
+    <span class="cm"># 3. 返回三元组</span>
+    <span class="kw">return</span> result.client_msg_id, result.create_time, result.new_msg_id
   </div>
 </section>
 
@@ -847,8 +974,8 @@ footer{
 
   <div class="schema-stats">
     <div class="schema-stat"><div class="schema-stat-num">42</div><div class="schema-stat-label">总表数</div></div>
-    <div class="schema-stat"><div class="schema-stat-num">5</div><div class="schema-stat-label">ADR 决策</div></div>
-    <div class="schema-stat"><div class="schema-stat-num">8</div><div class="schema-stat-label">业务领域</div></div>
+    <div class="schema-stat"><div class="schema-stat-num">6</div><div class="schema-stat-label">ADR 决策</div></div>
+    <div class="schema-stat"><div class="schema-stat-num">11</div><div class="schema-stat-label">业务领域</div></div>
     <div class="schema-stat"><div class="schema-stat-num">RLS</div><div class="schema-stat-label">硬隔离</div></div>
   </div>
 
@@ -996,9 +1123,17 @@ footer{
 
 <!-- ==================== 实施进度 ==================== -->
 <section id="progress">
-  <div class="section-tag">IMPLEMENTATION</div>
+  <div class="section-tag">IMPLEMENTATION · LIVE</div>
   <h2 class="section-title">实施进度<span class="accent">面板</span></h2>
-  <p class="section-sub">Plan 已批准，进入实施阶段。第一日完成 6/9 task，包含开发日志机制、长期记忆基础设施、Schema 设计、技术栈调研、ADR 文档化。</p>
+  <p class="section-sub">Plan 已批准，进入实施阶段。第一日完成 8/10 task，包含开发日志机制、长期记忆基础设施、Schema 设计、技术栈调研、ADR 文档化、项目档案网站、WechatAPIClient 调研。</p>
+
+  <div class="delta-banner">
+    <div class="delta-pulse"></div>
+    <div class="delta-text">
+      <div class="delta-tag">LATEST DELTA · 2026.06.18 EVENING</div>
+      <div class="delta-msg">用户主动提供 XYBotV2 WechatAPIClient 文档 → 调研后决定节点 wcferry 封装层完全对齐其 7 模块切分（base/login/message/user/chatroom/friend/tool/protect）。新增 ADR-006、Task #10。</div>
+    </div>
+  </div>
 
   <div class="tasks-grid">
     <div class="task-card done">
@@ -1021,8 +1156,8 @@ footer{
     </div>
     <div class="task-card done">
       <div class="task-id">TASK #6</div>
-      <div class="task-title">写入 Schema ADR-001</div>
-      <div class="task-desc">5 条 ADR 记录：方案 C 选型、多租户隔离、业务数据集中、群级主键、ORM 选型</div>
+      <div class="task-title">写入 Schema ADR</div>
+      <div class="task-desc">6 条 ADR 记录：方案 C 选型、多租户隔离、业务数据集中、群级主键、ORM 选型、节点 API 设计</div>
       <div class="task-status">COMPLETED</div>
     </div>
     <div class="task-card done">
@@ -1037,24 +1172,46 @@ footer{
       <div class="task-desc">填充精确版本号：Python 3.11 + PC 微信 3.9.12.17 + PostgreSQL 15 + Redis 7</div>
       <div class="task-status">COMPLETED</div>
     </div>
+    <div class="task-card done">
+      <div class="task-id">TASK #8</div>
+      <div class="task-title">设计网站结构和视觉</div>
+      <div class="task-desc">本网站设计阶段 · 已完成（暗色科技感 + 三色霓虹 + 网格背景 + 粒子动画）</div>
+      <div class="task-status">COMPLETED</div>
+    </div>
+    <div class="task-card done">
+      <div class="task-id">TASK #9</div>
+      <div class="task-title">实现单文件 HTML</div>
+      <div class="task-desc">D:\WeChatbot\timeline\index.html · 零外部依赖 · 可部署 GitHub Pages · 含今日所有增量</div>
+      <div class="task-status">COMPLETED</div>
+    </div>
     <div class="task-card pending">
       <div class="task-id">TASK #4</div>
       <div class="task-title">初始化项目骨架</div>
-      <div class="task-desc">D:\WeChatbot\ 项目结构 + Docker Compose + 本地 Git + apps/central + apps/node</div>
+      <div class="task-desc">D:\WeChatbot\ 项目结构 + Docker Compose + 本地 Git + apps/central + apps/node（按 7 模块切分）</div>
       <div class="task-status">NEXT UP</div>
     </div>
-    <div class="task-card pending">
-      <div class="task-id">TASK #8</div>
-      <div class="task-title">设计网站结构和视觉</div>
-      <div class="task-desc">本网站设计阶段 · 已完成</div>
-      <div class="task-status">DONE</div>
+    <div class="task-card blocked">
+      <div class="task-id">TASK #10</div>
+      <div class="task-title">实现节点 7 模块封装</div>
+      <div class="task-desc">按 WechatAPIClient 抄 7 模块（base/login/message/user/chatroom/friend/tool/protect）+ 1 秒节流 + Protect 4 小时</div>
+      <div class="task-status">BLOCKED BY #4</div>
     </div>
-    <div class="task-card pending">
-      <div class="task-id">TASK #9</div>
-      <div class="task-title">实现单文件 HTML</div>
-      <div class="task-desc">炫酷科技感单文件项目档案网站 · 即本页</div>
-      <div class="task-status">RUNNING</div>
-    </div>
+  </div>
+</section>
+
+<!-- ==================== 长期记忆库（NEW） ==================== -->
+<section id="memory">
+  <div class="section-tag">PERSISTENT MEMORY · NEW</div>
+  <h2 class="section-title">长期记忆<span class="accent">基础设施</span></h2>
+  <p class="section-sub">6 份 memory 文件跨会话保留，AI Agent 重启后能快速恢复完整上下文。每份文件用 frontmatter 描述类型与作用，MEMORY.md 作为索引。</p>
+
+  <div class="memory-grid">
+    <div class="mem-card"><div class="mem-icon">👤</div><div class="mem-name">user_profile.md</div><div class="mem-desc">用户画像：AI Agent 全栈开发、商用 SaaS 目标、已收客户定金、决策风格</div></div>
+    <div class="mem-card"><div class="mem-icon">📌</div><div class="mem-name">project_overview.md</div><div class="mem-desc">项目概览：中央+节点架构、三种部署形态、合规边界硬约束</div></div>
+    <div class="mem-card"><div class="mem-icon">📋</div><div class="mem-name">project_decisions.md</div><div class="mem-desc">8 轮讨论后最终决策：wcferry 主线、卡密激活、代理体系、防封壁垒</div></div>
+    <div class="mem-card"><div class="mem-icon">🔧</div><div class="mem-name">tech_stack.md</div><div class="mem-desc">精确版本号锁定：Python 3.11 + PC 微信 3.9.12.17 + PG 15 + Redis 7</div></div>
+    <div class="mem-card"><div class="mem-icon">🗄️</div><div class="mem-name">schema_decisions.md</div><div class="mem-desc">6 条 ADR：方案 C / RLS 隔离 / 数据集中 / 群级主键 / ORM / 节点 API</div></div>
+    <div class="mem-card"><div class="mem-icon">❓</div><div class="mem-name">open_questions.md</div><div class="mem-desc">5 个待用户决策点：定金详情、号类型、卡密面额、AI 计费维度、密码设置权</div></div>
   </div>
 </section>
 
@@ -1097,8 +1254,8 @@ footer{
 <!-- ==================== Footer ==================== -->
 <footer>
   <div class="footer-logo">⬢ WECHATBOT.SAAS</div>
-  <div class="footer-meta">PROJECT FILE · COMPILED 2026.06.18 · CLASSIFIED</div>
-  <div class="footer-meta">8 ROUNDS · 42 TABLES · 71 SWITCHES · 8 RATE-LIMITS</div>
+  <div class="footer-meta">PROJECT FILE · COMPILED 2026.06.18 · LIVE</div>
+  <div class="footer-meta">8 ROUNDS · 42 TABLES · 71 SWITCHES · 8 RATE-LIMITS · 52 NODE APIs · 6 ADRs · 6 MEMORIES</div>
   <div class="footer-quote">
     "不和哆来咪比技术；和它比能不能持续做下去、能不能签合同、能不能开发票、能不能扩规模——这些是哆来咪做不到的，是我们的护城河。"
   </div>
@@ -1151,7 +1308,7 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:.15});
 
-document.querySelectorAll('.tl-item,.stat,.stack-card,.schema-group,.rule-card,.task-card,.legal-col').forEach(el=>{
+document.querySelectorAll('.tl-item,.stat,.stack-card,.schema-group,.rule-card,.task-card,.legal-col,.api-mod,.api-hl,.mem-card').forEach(el=>{
   io.observe(el);
 });
 
